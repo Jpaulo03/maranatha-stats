@@ -15,7 +15,7 @@ let baseDeDatosCompleta = [];
 
 // --- 2. OBTENER DATOS ---
 function cargarDatosReales() {
-    fetch('https://bright-hotels-fry.loca.lt/obtener-estadisticas',{
+    fetch('https://maranatha-stats.onrender.com/obtener-estadisticas',{
         headers: { 'bypass-tunnel-reminder': 'true' }
     })
         .then(respuesta => respuesta.json())
