@@ -50,7 +50,7 @@ botonIniciar.addEventListener('click', function() {
 
     let fechaHoy = new Date().toISOString().split('T')[0]; 
     
-    fetch('https://bright-hotels-fry.loca.lt/registrar-partido', {
+    fetch('https://maranatha-stats.onrender.com/registrar-partido', {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ btnDeshacer.addEventListener('click', function() {
         textoEstado.innerText = "Borrando de la Base de Datos...";
         
         // Le pedimos al servidor que borre ese ID específico
-        fetch('https://bright-hotels-fry.loca.lt/eliminar-jugada/' + ultimoRegistro.id_db, {
+        fetch('https://maranatha-stats.onrender.com/eliminar-jugada/' + ultimoRegistro.id_db, {
             method: 'DELETE',
             headers: {
                 'bypass-tunnel-reminder': 'true' // <--- LA LLAVE QUE FALTABA AQUÍ
@@ -284,7 +284,7 @@ function guardarRegistro(resultadoFinal) {
     textoEstado.innerText = "Enviando datos...";
 
     // --- EL MENSAJERO (FETCH) AL SERVIDOR NODE.JS ---
-    fetch('https://bright-hotels-fry.loca.lt/registrar-jugada', {
+    fetch('https://maranatha-stats.onrender.com/registrar-jugada', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
