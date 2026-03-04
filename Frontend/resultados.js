@@ -9,6 +9,15 @@ const cuerpoTablaArmadoRival = document.getElementById('cuerpo-tabla-armado-riva
 const contenedorSets = document.getElementById('puntuacion-sets');
 
 
+const cuerpoTablaSaque = document.getElementById('cuerpo-tabla-saque');
+const cuerpoTablaDefensa = document.getElementById('cuerpo-tabla-defensa');
+
+const cuerpoTablaSaqueRival = document.getElementById('cuerpo-tabla-saque-rival');
+const cuerpoTablaDefensaRival = document.getElementById('cuerpo-tabla-defensa-rival');
+
+
+
+
 const selectorPartido = document.getElementById('selector-partido');
 
 let baseDeDatosCompleta = [];
