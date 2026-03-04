@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Maranatha - Analisis</title>
+    <link rel="stylesheet" href="style-resultado.css">
+    <script src="resultados.js" defer></script>
+</head>
+<body>
+    <div class="contenedor-dashboard">
+        <div class="controles-dashboard" style="text-align: center; margin-bottom: 30px; padding: 15px; background: #ecf0f1; border-radius: 8px;">
+            <label for="selector-partido" style="font-size: 1.2rem; font-weight: bold;">🏐 Filtrar por Partido: </label>
+            <select id="selector-partido" style="font-size: 1.1rem; padding: 5px; margin-left: 10px; border-radius: 5px;">
+                <option value="todos">Cargando partidos...</option>
+            </select>
+        </div>  
+
+        <div id="panel-marcador-dashboard" style="text-align: center; margin-bottom: 30px; padding: 20px; background: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <h2 style="color: #2c3e50; margin-top: 0; margin-bottom: 15px;">Marcador del Encuentro</h2>
+            
+            <div id="puntuacion-sets" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <span style="color: #7f8c8d;">Selecciona un partido para ver el marcador...</span>
+            </div>
+        </div>
+
+
+        <h1 style="color: #2c3e50;">⚔️ Maranatha - Atacantes</h1>
+        <table id="tabla-ataques" class="tabla-estadisticas">
+            <thead>
+                <tr>
+                    <th>Atleta</th><th>Total</th><th>Puntos (🟢)</th><th>Sigue (⚪)</th><th>Errores (🔴)</th><th>% Error</th><th>Efectividad</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla-ataque"></tbody>
+        </table>
+
+        <h1 class="titulo-separado" style="color: #2c3e50;">🛡️ Maranatha - Receptoras</h1>
+        <table id="tabla-recepcion" class="tabla-estadisticas">
+            <thead>
+                <tr>
+                    <th>Atleta</th><th>Total</th><th>Perf. (3)</th><th>Posit. (2)</th><th>Negat. (1)</th><th>Error (0)</th><th>Efectividad</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla-recepcion"></tbody>
+        </table>
+
+        <h1 class="titulo-separado" style="color: #2c3e50;">🏐 Maranatha - Armadoras</h1>
+        <table id="tabla-armado" class="tabla-estadisticas">
+            <thead>
+                <tr>
+                    <th>Atleta</th><th>Total</th><th>1vs1 (🟢)</th><th>Doble (🟡)</th><th>Forzado (🟠)</th><th>Error (🔴)</th><th>% Perfecto</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla-armado"></tbody>
+        </table>
+
+        <h1 class="titulo-separado" style="color: #2c3e50;">🚀 Maranatha - Saque</h1>
+        <table class="tabla-estadisticas">
+            <thead>
+                <tr>
+                    <th>Atleta</th><th>Total</th><th>Ace (🟢)</th><th>Positivo (🟡)</th><th>Error (🔴)</th><th>% Eficacia</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla-saque"></tbody>
+        </table>
+
+        <h1 class="titulo-separado" style="color: #2c3e50;">🧱 Maranatha - Bloqueo y Defensa</h1>
+        <table class="tabla-estadisticas">
+            <thead>
+                <tr>
+                    <th>Atleta</th><th>Bloqueos Pto.</th><th>Def. Excelente</th><th>Def. Positiva</th><th>Def. Error</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla-defensa"></tbody>
+        </table>
+
+        <hr style="margin: 50px 0; border: 3px solid #c0392b; border-radius: 5px;">
+        
+        <h1 style="color: #c0392b;">🔴 Rival - Atacantes</h1>
+        <table class="tabla-estadisticas">
+            <thead>
+                <tr style="background-color: #c0392b;">
+                    <th>Atleta</th><th>Total</th><th>Puntos (🟢)</th><th>Sigue (⚪)</th><th>Errores (🔴)</th><th>% Error</th><th>Efectividad</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla-ataque-rival"></tbody>
+        </table>
+
+        <h1 class="titulo-separado" style="color: #c0392b;">🔴 Rival - Receptoras</h1>
+        <table class="tabla-estadisticas">
+            <thead>
+                <tr style="background-color: #c0392b;">
+                    <th>Atleta</th><th>Total</th><th>Perf. (3)</th><th>Posit. (2)</th><th>Negat. (1)</th><th>Error (0)</th><th>Efectividad</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla-recepcion-rival"></tbody>
+        </table>
+
+        <h1 class="titulo-separado" style="color: #c0392b;">🔴 Rival - Armadoras</h1>
+        <table class="tabla-estadisticas">
+            <thead>
+                <tr style="background-color: #c0392b;">
+                    <th>Atleta</th><th>Total</th><th>1vs1 (🟢)</th><th>Doble (🟡)</th><th>Forzado (🟠)</th><th>Error (🔴)</th><th>% Perfecto</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla-armado-rival"></tbody>
+        </table>
+
+        <h1 class="titulo-separado" style="color: #c0392b;">🔴 Rival - Saque</h1>
+        <table class="tabla-estadisticas">
+            <thead>
+                <tr style="background-color: #c0392b;">
+                    <th>Atleta</th><th>Total</th><th>Ace (🟢)</th><th>Positivo (🟡)</th><th>Error (🔴)</th><th>% Eficacia</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla-saque-rival"></tbody>
+        </table>
+
+        <h1 class="titulo-separado" style="color: #c0392b;">🔴 Rival - Bloqueo y Defensa</h1>
+        <table class="tabla-estadisticas">
+            <thead>
+                <tr style="background-color: #c0392b;">
+                    <th>Atleta</th><th>Bloqueos Pto.</th><th>Def. Excelente</th><th>Def. Positiva</th><th>Def. Error</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla-defensa-rival"></tbody>
+        </table>
+    </div>
+
+</body>
+</html>

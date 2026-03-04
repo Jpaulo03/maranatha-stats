@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics Maranatha Volley</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header class="cabecera">
+        <h1>Maranatha Volley - Estadísticas</h1>
+        <div id="panel-marcador" style="background-color: #ecf0f1; border-radius: 10px; padding: 10px 20px; margin-top: 15px; display: inline-block; text-align: center;">
+            
+            <div style="font-size: 2.5rem; font-weight: bold; font-family: monospace;">
+                <span style="color: #2c3e50;">MAR <span id="marcador-maranatha">0</span></span>
+                <span style="color: #7f8c8d; margin: 0 10px;">-</span>
+                <span style="color: #c0392b;"><span id="marcador-rival">0</span> <span id="nombre-rival-marcador">RIV</span></span>
+            </div>
+            
+            <div style="margin-top: 5px;">
+                <button onclick="ajustarMarcador('Maranatha', 1)" class="btn-pequeno" style="background:#2c3e50;">+1</button>
+                <button onclick="ajustarMarcador('Maranatha', -1)" class="btn-pequeno" style="background:#7f8c8d;">-1</button>
+                <span style="margin: 0 15px;"></span>
+                <button onclick="ajustarMarcador('Rival', -1)" class="btn-pequeno" style="background:#7f8c8d;">-1</button>
+                <button onclick="ajustarMarcador('Rival', 1)" class="btn-pequeno" style="background:#c0392b;">+1</button>
+            </div>
+            
+        </div>
+        <div class="controles-cabecera">
+            <button id="btn-set-menos" class="btn-pequeno">-</button>
+            <span id="texto-set">Set 1</span>
+            <button id="btn-set-mas" class="btn-pequeno">+</button>
+            
+            <button id="btn-deshacer" class="btn-pequeno btn-rojo">↩️ Deshacer Último</button>
+            <button id="btn-terminar" class="btn-pequeno btn-oscuro">🛑 Terminar Partido</button>
+        </div>
+
+        <p id="estado-registro">Esperando acción...</p>
+    </header>
+
+
+    <section id="pantalla-configuracion" class="config-panel">
+        <h2>⚙️ Configuración del Encuentro</h2>
+        
+        <div class="grupo-input">
+            <label>Nombre del Equipo Rival:</label>
+            <input type="text" id="input-nombre-rival" placeholder="Ej: Club Universitario">
+        </div>
+
+        <h3>Jugadoras Rivales (Números o Nombres)</h3>
+        <div class="grid-inputs-rivales">
+            <input type="text" class="input-rival" placeholder="Rival 1">
+            <input type="text" class="input-rival" placeholder="Rival 2">
+            <input type="text" class="input-rival" placeholder="Rival 3">
+            <input type="text" class="input-rival" placeholder="Rival 4">
+            <input type="text" class="input-rival" placeholder="Rival 5">
+            <input type="text" class="input-rival" placeholder="Rival 6">
+            <input type="text" class="input-rival" placeholder="Rival 7">
+            <input type="text" class="input-rival" placeholder="Rival 8">
+            <input type="text" class="input-rival" placeholder="Rival 9">
+            <input type="text" class="input-rival" placeholder="Rival 10">
+            <input type="text" class="input-rival" placeholder="Rival 11">
+            <input type="text" class="input-rival" placeholder="Rival 12">
+            <input type="text" class="input-rival" placeholder="Rival 13">
+            <input type="text" class="input-rival" placeholder="Rival 14">
+        </div>
+
+        <button id="btn-iniciar-encuentro" class="btn-iniciar">Empezar Partido 🏐</button>
+    </section>
+
+
+    <main id="pantalla-cancha" class="contenedor-principal oculto">
+        
+        <section class="panel-jugadores">
+            <h2>1. Selecciona Jugador</h2>
+            
+            <div class="contenedor-equipos">
+                <div class="columna-equipo">
+                    <h3 class="titulo-equipo local">Maranatha</h3>
+                    <div class="grid-botones">
+                        <button class="btn-jugador mi-equipo">#7 - Eliana</button>
+                        <button class="btn-jugador mi-equipo">#5 - Anahi</button>
+                        <button class="btn-jugador mi-equipo">#2 - Sabrina</button>
+                        <button class="btn-jugador mi-equipo">#83 - Luz</button>
+                        <button class="btn-jugador mi-equipo">#4 - Alexandra</button>
+                        <button class="btn-jugador mi-equipo">#21 - Fernanda</button>
+                        <button class="btn-jugador mi-equipo">#19 - Luciana</button>
+                        <button class="btn-jugador mi-equipo">#30 - Luna</button>
+                        <button class="btn-jugador mi-equipo">#28 - Thais</button>
+                        <button class="btn-jugador mi-equipo">#10 - Montserrat</button>
+                        <button class="btn-jugador mi-equipo">#1 - Triana</button>
+                        <button class="btn-jugador mi-equipo">#8 - Marian</button>
+                        <button class="btn-jugador mi-equipo">#18 - Diana</button>
+                        <button class="btn-jugador mi-equipo"># - Valeria</button>
+
+
+                    </div>
+                </div>
+
+                <div class="columna-equipo">
+                    <h3 class="titulo-equipo visitante">Rival</h3>
+                    <div class="grid-botones">
+                        <button class="btn-jugador rival">R1</button>
+                        <button class="btn-jugador rival">R2</button>
+                        <button class="btn-jugador rival">R3</button>
+                        <button class="btn-jugador rival">R4</button>
+                        <button class="btn-jugador rival">R5</button>
+                        <button class="btn-jugador rival">R6</button>
+                        <button class="btn-jugador rival">R7</button>
+                        <button class="btn-jugador rival">R8</button>
+                        <button class="btn-jugador rival">R9</button>
+                        <button class="btn-jugador rival">R10</button>
+                        <button class="btn-jugador rival">R11</button>
+                        <button class="btn-jugador rival">R12</button>
+                        <button class="btn-jugador rival">R13</button>
+                        <button class="btn-jugador rival">R14</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel-acciones">
+            <h2>2. ¿Qué acción realizó?</h2>
+            <div class="grid-botones">
+                <button class="btn-accion" id="btn-ataque">Ataque</button>
+                <button class="btn-accion" id="btn-recepcion">Recepción</button>
+                <button class="btn-accion" id="btn-armado">Armado</button>
+                <button class="btn-accion" id="btn-saque">Saque</button>
+                <button class="btn-accion" id="btn-bloqueo">Bloqueo</button>
+                <button class="btn-accion" id="btn-defensa">Defensa</button>
+            </div>
+
+            <div id="panel-zonas" class="oculto">
+                <h3>3. ¿Desde qué zona?</h3>
+                <div class="grid-botones">
+                    <button class="btn-zona">Zona 4 (Punta)</button>
+                    <button class="btn-zona">Zona 3 (Centro)</button>
+                    <button class="btn-zona">Zona 2 (Opuesto)</button>
+                    <button class="btn-zona">Zaguero</button>
+                </div>
+            </div>
+
+            <div id="panel-resultados" class="oculto">
+                <h3>4. Resultado final</h3>
+                <div class="grid-resultados">
+                    </div>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
