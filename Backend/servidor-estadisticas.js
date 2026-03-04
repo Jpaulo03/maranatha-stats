@@ -10,10 +10,10 @@ aplicacion.use(servidorExpress.json()); // Permite leer el "paquete de datos" qu
 
 // --- 1. CONEXIÓN A LA BASE DE DATOS WORKBENCH ---
 const conexionBD = conectorMySQL.createConnection({
-    host: 'localhost',
-    user: 'root',      // Tu usuario de Workbench (usualmente 'root')
-    password: 'admin',      // Pon aquí la contraseña de tu MySQL (si tienes)
-    database: 'volley_stats'
+    host: 'bwpbgxyijdpjonpghqko-mysql.services.clever-cloud.com',
+    user: 'utgx1uufaesjth8q',      // Tu usuario de Workbench (usualmente 'root')
+    password: 'azn4zWU2Eqbh3ahEItvw',      // Pon aquí la contraseña de tu MySQL (si tienes)
+    database: 'bwpbgxyijdpjonpghqko'
 });
 
 conexionBD.connect((error) => {
