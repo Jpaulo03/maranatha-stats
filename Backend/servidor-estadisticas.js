@@ -124,5 +124,5 @@ aplicacion.post('/registrar-partido', (peticion, respuesta) => {
 const PUERTO = process.env.PORT || 3000;
 
 aplicacion.listen(PUERTO, () => {
-    console.log("Servidor encendido en el puerto: " + puerto);
+    console.log("Servidor encendido en el puerto: " + PUERTO);
 });
