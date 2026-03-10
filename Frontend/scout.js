@@ -125,16 +125,17 @@ function registrarAtaque(resultado) {
     const coord_dy = destinoY / canvas.height;
 
     const datosScout = {
-        id_partido: "Maranatha vs DINAMO", 
+        id_partido: "Maranatha vs DINAMO",
         atacante: jugadoraActiva,
-        zona_origen: zonaOrigen,
-        zona_destino: zonaDestino,
+        zona_origen: parseInt(zonaOrigen) || 0, 
+        zona_destino: parseInt(zonaDestino) || 0,
         origen_x: coord_ox,
         origen_y: coord_oy,
         destino_x: coord_dx,
         destino_y: coord_dy,
         resultado: resultado
     };
+
 
     fetch('https://maranatha-stats.onrender.com/registrar-scout', {
         method: 'POST',
