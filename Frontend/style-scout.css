@@ -1,0 +1,221 @@
+:root {
+    --color-vino: #722F37;
+    --color-vino-oscuro: #4A1C24;
+    --color-cancha: #e8a87c;
+    --color-lineas: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.header-vino {
+    background-color: var(--color-vino);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.contenedor-principal {
+    display: flex;
+    max-width: 1000px;
+    margin: 20px auto;
+    gap: 20px;
+    padding: 0 10px;
+}
+
+.panel-jugadoras {
+    width: 250px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-jugadora {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 2px solid var(--color-vino);
+    background: white;
+    color: var(--color-vino);
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-jugadora.activa, .btn-jugadora:hover {
+    background: var(--color-vino);
+    color: white;
+}
+
+.zona-cancha {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* --- CANCHA COMPLETA --- */
+.zona-cancha {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancha-completa {
+    width: 350px;
+    height: 600px; /* Más alta para que sean las dos mitades */
+    background-color: var(--color-cancha);
+    border: 5px solid var(--color-lineas);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    touch-action: none; 
+}
+
+.mitad-cancha {
+    width: 100%;
+    height: 50%;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+/* La Red en el centro exacto */
+.linea-red-central {
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: 8px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+    transform: translateY(-50%);
+    z-index: 15;
+}
+
+/* Líneas de 3 metros */
+.linea-tres-metros-arriba {
+    position: absolute;
+    bottom: 33.33%;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-lineas);
+}
+
+.linea-tres-metros-abajo {
+    position: absolute;
+    top: 33.33%;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-lineas);
+}
+
+.zona-touch {
+    border: 1px dashed rgba(255,255,255,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255,255,255,0.6);
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+/* Color distinto para la zona de defensa para ubicarnos mejor */
+.mitad-cancha.defensa .zona-touch {
+    color: rgba(114, 47, 55, 0.4); /* Color vino transparente */
+    border-color: rgba(114, 47, 55, 0.2);
+}
+
+#lienzo-dibujo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    pointer-events: none; 
+}
+
+.linea-red {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.linea-tres-metros {
+    position: absolute;
+    top: 33.33%;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-lineas);
+}
+
+.zona-touch {
+    border: 1px dashed rgba(255,255,255,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+#lienzo-dibujo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    pointer-events: none; 
+}
+
+.oculto { display: none !important; }
+
+#modal-resultado {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.contenido-modal {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+}
+
+.btn-res {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-res.punto { background: #28a745; }
+.btn-res.sigue { background: #6c757d; }
+.btn-res.error { background: #dc3545; }
+.btn-res.bloqueo { background: #343a40; }
+.btn-cancelar { width: 100%; padding: 10px; margin-top: 15px; cursor: pointer; }

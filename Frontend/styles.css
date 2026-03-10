@@ -1,14 +1,12 @@
-/* --- VARIABLES DE COLOR --- */
 :root {
     --color-fondo: #f4f7f6;
     --color-texto: #333333;
-    --color-primario: #2c3e50; /* Azul oscuro elegante */
-    --color-secundario: #3498db; /* Azul claro para acciones */
+    --color-primario: #2c3e50; 
+    --color-secundario: #3498db; 
     --color-jugador: #ffffff;
     --sombra: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* --- ESTILOS GENERALES --- */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -19,7 +17,6 @@
 body {
     background-color: var(--color-fondo);
     color: var(--color-texto);
-    /* Evita que el usuario seleccione texto por accidente al tocar rápido la tablet */
     user-select: none; 
 }
 
@@ -37,8 +34,6 @@ body {
     margin-top: 5px;
 }
 
-/* --- ESTRUCTURA PRINCIPAL (GRID) --- */
-/* Divide la pantalla en dos columnas iguales en PC/Tablet horizontal */
 .contenedor-principal {
     display: grid;
     grid-template-columns: 1fr 1fr; 
@@ -56,7 +51,6 @@ h2, h3 {
     padding-bottom: 5px;
 }
 
-/* --- BOTONES (TIPO CARDS PARA TABLET) --- */
 .grid-botones {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -74,12 +68,10 @@ button {
     transition: transform 0.1s, background-color 0.2s;
 }
 
-/* Efecto al presionar (Feedback visual vital para la tablet) */
 button:active {
     transform: scale(0.95);
 }
 
-/* Estilo específico para los jugadores */
 .btn-jugador {
     background-color: var(--color-jugador);
     color: var(--color-primario);
@@ -90,7 +82,6 @@ button:active {
     border: 2px solid var(--color-secundario);
 }
 
-/* Estilo específico para las acciones */
 .btn-accion {
     background-color: var(--color-secundario);
     color: white;
@@ -100,21 +91,17 @@ button:active {
     background-color: #2980b9;
 }
 
-/* --- CLASES DE UTILIDAD --- */
 .oculto {
     display: none;
 }
 
-/* --- COLORES PARA LOS RESULTADOS --- */
 .btn-resultado { color: white; margin-top: 10px; }
-.btn-punto { background-color: #27ae60; } /* Verde éxito */
-.btn-neutro { background-color: #f39c12; } /* Naranja precaución */
-.btn-error { background-color: #c0392b; } /* Rojo error */
+.btn-punto { background-color: #27ae60; } 
+.btn-neutro { background-color: #f39c12; } 
+.btn-error { background-color: #c0392b; } 
 
-/* --- BOTONES DE ZONA --- */
 .btn-zona {
-    background-color: #8e44ad; /* Morado para diferenciarlo */
-    color: white;
+    background-color: #8e44ad; 
     margin-top: 10px;
 }
 
@@ -122,14 +109,13 @@ button:active {
     background-color: #732d91;
 }
 
-/* --- LAYOUT PARA DOS EQUIPOS --- */
 .contenedor-equipos {
     display: flex;
     gap: 15px;
 }
 
 .columna-equipo {
-    flex: 1; /* Ambas columnas toman el 50% del espacio */
+    flex: 1; 
 }
 
 .titulo-equipo {
@@ -139,28 +125,30 @@ button:active {
     border-radius: 5px;
     margin-bottom: 10px;
     color: white;
-    border-bottom: none; /* Quitamos el borde por defecto de los h3 */
+    border-bottom: none; 
 }
 
-.titulo-equipo.local { background-color: var(--color-primario); }
-.titulo-equipo.visitante { background-color: #c0392b; /* Rojo para el rival */ }
+.titulo-equipo.local { 
+    background-color: var(--color-primario); 
+}
+.titulo-equipo.visitante { 
+    background-color: #c0392b;  
+}
 
-/* --- COLORES DISTINTOS PARA BOTONES DE JUGADORES --- */
 .btn-jugador.mi-equipo {
     background-color: var(--color-jugador);
     color: var(--color-primario);
 }
 
 .btn-jugador.rival {
-    background-color: #fce4e4; /* Fondo rojizo claro */
-    color: #c0392b; /* Texto rojo oscuro */
+    background-color: #fce4e4; 
+    color: #c0392b; 
 }
 
 .btn-jugador.rival:hover {
     border: 2px solid #c0392b;
 }
 
-/* --- PANTALLA DE CONFIGURACIÓN --- */
 .config-panel {
     max-width: 600px;
     margin: 20px auto;
@@ -202,7 +190,6 @@ input[type="text"] {
     background-color: #2ecc71;
 }
 
-/* --- CONTROLES DE CABECERA (SET Y DESHACER) --- */
 .controles-cabecera {
     margin-top: 15px;
     display: flex;
@@ -237,35 +224,30 @@ input[type="text"] {
 .btn-rojo {
     background-color: #e74c3c;
     font-size: 1rem;
-    margin-left: 20px; /* Lo separa un poco de los controles del set */
+    margin-left: 20px; 
 }
 
 .btn-rojo:hover {
     background-color: #c0392b;
 }
 
-/* --- AJUSTE PARA LISTAS LARGAS DE EQUIPOS --- */
 
-/* 1. Forzamos 2 columnas de jugadoras para ahorrar espacio */
 .columna-equipo .grid-botones {
     grid-template-columns: 1fr 1fr; 
     gap: 10px;
 }
 
-/* 2. Reducimos un poquito el tamaño del botón para que entren más en pantalla */
 .btn-jugador {
-    padding: 12px 5px; /* Menos espacio arriba y abajo del texto */
-    font-size: 0.95rem; /* Letra apenas más chica */
+    padding: 12px 5px; 
+    font-size: 0.95rem; 
 }
 
-/* 3. Le damos una altura máxima al panel y le permitimos hacer scroll independiente */
 .columna-equipo {
-    max-height: 60vh; /* Ocupará máximo el 60% de la altura de tu pantalla */
-    overflow-y: auto; /* Permite deslizar si hay muchas jugadoras */
+    max-height: 60vh; 
+    overflow-y: auto; 
     padding-right: 5px;
 }
 
-/* 4. Ocultamos la barra gris fea de Windows para que siga pareciendo una App de Tablet */
 .columna-equipo::-webkit-scrollbar {
     width: 6px;
 }

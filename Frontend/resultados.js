@@ -1,4 +1,3 @@
-// --- 1. CAPTURAR ELEMENTOS (MARANATHA Y RIVAL) ---
 const cuerpoTablaAtaque = document.getElementById('cuerpo-tabla-ataque');
 const cuerpoTablaRecepcion = document.getElementById('cuerpo-tabla-recepcion');
 const cuerpoTablaArmado = document.getElementById('cuerpo-tabla-armado');
@@ -22,7 +21,6 @@ const selectorPartido = document.getElementById('selector-partido');
 
 let baseDeDatosCompleta = [];
 
-// --- 2. OBTENER DATOS ---
 function cargarDatosReales() {
     fetch('https://maranatha-stats.onrender.com/obtener-estadisticas',{
         headers: { 'bypass-tunnel-reminder': 'true' }
@@ -40,7 +38,6 @@ function cargarDatosReales() {
         .catch(error => console.error("❌ Error al obtener datos:", error));
 }
 
-// --- 3. MENÚ DESPLEGABLE ---
 function llenarMenuPartidos(datosCrudos) {
     let partidosUnicos = [...new Set(datosCrudos.map(jugada => jugada.id_partido))];
     selectorPartido.innerHTML = ""; 
@@ -60,20 +57,16 @@ function llenarMenuPartidos(datosCrudos) {
     });
 }
 
-// --- 4. LÓGICA DE PROCESAMIENTO MATEMÁTICO ---
 function procesarEstadisticas(idPartidoSeleccionado) {
-    // 1. Limpiamos las tablas y el marcador
     cuerpoTablaAtaque.innerHTML = ""; cuerpoTablaRecepcion.innerHTML = ""; cuerpoTablaArmado.innerHTML = "";
     cuerpoTablaSaque.innerHTML = ""; cuerpoTablaDefensa.innerHTML = "";
     cuerpoTablaAtaqueRival.innerHTML = ""; cuerpoTablaRecepcionRival.innerHTML = ""; cuerpoTablaArmadoRival.innerHTML = "";
     cuerpoTablaSaqueRival.innerHTML = ""; cuerpoTablaDefensaRival.innerHTML = "";
     contenedorSets.innerHTML = "";
 
-    // Diccionarios de Atletas
     let resAtaque = {}; let resRecepcion = {}; let resArmado = {}; let resSaque = {}; let resDefensa = {};
     let resAtaqueRival = {}; let resRecepcionRival = {}; let resArmadoRival = {}; let resSaqueRival = {}; let resDefensaRival = {};
 
-    // NUEVO: Diccionario para guardar el puntaje de cada set
     let marcadorSets = {};
     const resultadosPunto = ['Punto Directo', 'Positivo / Punto'];
     const resultadosError = ['Error / Bloqueado', 'Error (0)', 'Error', 'Error (Falta)'];
@@ -84,16 +77,12 @@ function procesarEstadisticas(idPartidoSeleccionado) {
         let nombre = accion.jugador;
         let esMaranatha = accion.equipo === "Maranatha";
         
-        // --- NUEVA LÓGICA: CALCULAR MARCADOR AL VUELO ---
-        // Si la jugada tiene un set (ej: 1), lo usamos. Si no, asumimos que es el Set 1.
         let numSet = accion.set || 1; 
         
-        // Si es la primera vez que vemos este set, creamos sus contadores en 0
         if (!marcadorSets[numSet]) {
             marcadorSets[numSet] = { maranatha: 0, rival: 0 };
         }
 
-        // Sumamos puntos según quién hizo el punto o quién cometió el error
         if (resultadosPunto.includes(accion.resultado)) {
             if (esMaranatha) marcadorSets[numSet].maranatha++;
             else marcadorSets[numSet].rival++;
@@ -102,7 +91,6 @@ function procesarEstadisticas(idPartidoSeleccionado) {
             else marcadorSets[numSet].maranatha++;
         }
 
-        // --- LÓGICA EXISTENTE DE ESTADÍSTICAS (Ataque, Saque, etc.) ---
         let dicAtaque = esMaranatha ? resAtaque : resAtaqueRival;
         let dicRec = esMaranatha ? resRecepcion : resRecepcionRival;
         let dicArm = esMaranatha ? resArmado : resArmadoRival;
@@ -148,7 +136,6 @@ function procesarEstadisticas(idPartidoSeleccionado) {
         }
     });
 
-    // --- NUEVO: DIBUJAR LOS CUADRITOS DEL MARCADOR EN PANTALLA ---
     if (Object.keys(marcadorSets).length === 0) {
         contenedorSets.innerHTML = "<span style='color: #7f8c8d;'>No hay puntos registrados en este partido.</span>";
     } else {
@@ -156,7 +143,6 @@ function procesarEstadisticas(idPartidoSeleccionado) {
             let ptsMar = marcadorSets[numSet].maranatha;
             let ptsRiv = marcadorSets[numSet].rival;
             
-            // Pintamos el borde superior dependiendo de quién va ganando
             let colorBorde = ptsMar > ptsRiv ? '#2980b9' : (ptsRiv > ptsMar ? '#c0392b' : '#bdc3c7');
 
             contenedorSets.innerHTML += `
@@ -170,7 +156,6 @@ function procesarEstadisticas(idPartidoSeleccionado) {
         });
     }
 
-    // --- DIBUJAR TABLAS ESTADÍSTICAS ---
     dibujarTablaAtaque(resAtaque, cuerpoTablaAtaque); dibujarTablaAtaque(resAtaqueRival, cuerpoTablaAtaqueRival);
     dibujarTablaRecepcion(resRecepcion, cuerpoTablaRecepcion); dibujarTablaRecepcion(resRecepcionRival, cuerpoTablaRecepcionRival);
     dibujarTablaArmado(resArmado, cuerpoTablaArmado); dibujarTablaArmado(resArmadoRival, cuerpoTablaArmadoRival);
@@ -178,7 +163,6 @@ function procesarEstadisticas(idPartidoSeleccionado) {
     dibujarTablaDefensa(resDefensa, cuerpoTablaDefensa); dibujarTablaDefensa(resDefensaRival, cuerpoTablaDefensaRival);
 }
 
-// --- FUNCIONES AUXILIARES PARA DIBUJAR (Para no repetir código) ---
 function dibujarTablaAtaque(diccionario, elementoHTML) {
     Object.keys(diccionario).forEach(nombre => {
         let info = diccionario[nombre];

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scout Tendencias Rival</title>
+    <link rel="stylesheet" href="style-scout.css">
+    <script src="scout.js" defer></script>
+</head>
+<body>
+    <header class="header-vino">
+        <h1>Análisis de Tendencias</h1>
+    </header>
+
+    <div class="contenedor-principal">
+        <aside class="panel-jugadoras">
+            <h3>Selecciona Atacante</h3>
+            <div class="lista-botones" id="lista-jugadoras">
+                <button class="btn-jugadora activa">#4 - Central</button>
+                <button class="btn-jugadora">#7 - Punta</button>
+                <button class="btn-jugadora">#12 - Opuesto</button>
+            </div>
+        </aside>
+
+        <main class="zona-cancha">
+            <div class="cancha-completa" id="cancha">
+                <canvas id="lienzo-dibujo"></canvas>
+                
+                <div class="mitad-cancha rival">
+                    <div class="zona-touch origen" data-zona="1">1</div>
+                    <div class="zona-touch origen" data-zona="6">6</div>
+                    <div class="zona-touch origen" data-zona="5">5</div>
+                    <div class="zona-touch origen" data-zona="2">2</div>
+                    <div class="zona-touch origen" data-zona="3">3</div>
+                    <div class="zona-touch origen" data-zona="4">4</div>
+                    <div class="linea-tres-metros-arriba"></div>
+                </div>
+
+                <div class="linea-red-central"></div>
+
+                <div class="mitad-cancha defensa">
+                    <div class="zona-touch destino" data-zona="4">4</div>
+                    <div class="zona-touch destino" data-zona="3">3</div>
+                    <div class="zona-touch destino" data-zona="2">2</div>
+                    <div class="zona-touch destino" data-zona="5">5</div>
+                    <div class="zona-touch destino" data-zona="6">6</div>
+                    <div class="zona-touch destino" data-zona="1">1</div>
+                    <div class="linea-tres-metros-abajo"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="modal-resultado" class="oculto">
+        <div class="contenido-modal">
+            <h3>Resultado del Ataque</h3>
+            <button class="btn-res punto">🟢 Punto</button>
+            <button class="btn-res sigue">⚪ Sigue</button>
+            <button class="btn-res error">🔴 Error</button>
+            <button class="btn-res bloqueo">⬛ Bloqueado</button>
+            <button class="btn-cancelar">Cancelar Línea</button>
+        </div>
+    </div>
+</body>
+</html>

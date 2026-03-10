@@ -4,15 +4,13 @@ const cors = require('cors');
 
 const aplicacion = servidorExpress();
 
-// Configuraciones básicas
 aplicacion.use(cors());
-aplicacion.use(servidorExpress.json()); // Permite leer el "paquete de datos" que enviamos
+aplicacion.use(servidorExpress.json()); 
 
-// --- 1. CONEXIÓN A LA BASE DE DATOS WORKBENCH ---
 const conexionBD = conectorMySQL.createConnection({
     host: 'bwpbgxyijdpjonpghqko-mysql.services.clever-cloud.com',
-    user: 'utgx1uufaesjth8q',      // Tu usuario de Workbench (usualmente 'root')
-    password: 'azn4zWU2Eqbh3ahEItvw',      // Pon aquí la contraseña de tu MySQL (si tienes)
+    user: 'utgx1uufaesjth8q',      
+    password: 'azn4zWU2Eqbh3ahEItvw',
     database: 'bwpbgxyijdpjonpghqko'
 });
 
@@ -24,17 +22,13 @@ conexionBD.connect((error) => {
     console.log('✅ ¡Conectado exitosamente a la base de datos de Voleibol!');
 });
 
-// --- 2. RUTA PARA RECIBIR Y GUARDAR LA JUGADA ---
 aplicacion.post('/registrar-jugada', (peticion, respuesta) => {
-    // Aquí recibimos el paquete que armamos en el frontend
     const paquete = peticion.body; 
 
-    // La instrucción SQL limpia
     const consultaSQL = `INSERT INTO registro_acciones 
         (id_partido, numero_set, equipo, jugador, accion, zona, resultado) 
         VALUES (?, ?, ?, ?, ?, ?, ?)`;
     
-    // Los datos exactos en el orden de los signos de interrogación
     const valoresAGuardar = [
         paquete.partido_id,
         paquete.set,
@@ -45,7 +39,6 @@ aplicacion.post('/registrar-jugada', (peticion, respuesta) => {
         paquete.resultado
     ];
 
-    // Ejecutamos la inserción en Workbench
     conexionBD.query(consultaSQL, valoresAGuardar, (errorBD, resultados) => {
         if (errorBD) {
             console.error('❌ Error guardando la jugada:', errorBD);
@@ -57,12 +50,9 @@ aplicacion.post('/registrar-jugada', (peticion, respuesta) => {
     });
 });
 
-// --- NUEVA RUTA: ELIMINAR JUGADA (DESHACER) ---
-// Usamos el método DELETE y recibimos el ID por la URL
 aplicacion.delete('/eliminar-jugada/:id', (peticion, respuesta) => {
     const idParaBorrar = peticion.params.id;
     
-    // La instrucción SQL para borrar exactamente esa fila
     const consultaBorrar = "DELETE FROM registro_acciones WHERE id_accion = ?";
 
     conexionBD.query(consultaBorrar, [idParaBorrar], (errorBD, resultados) => {
@@ -76,9 +66,7 @@ aplicacion.delete('/eliminar-jugada/:id', (peticion, respuesta) => {
     });
 });
 
-// --- NUEVA RUTA: OBTENER TODAS LAS ESTADÍSTICAS ---
 aplicacion.get('/obtener-estadisticas', (peticion, respuesta) => {
-    // Pedimos toda la tabla a MySQL
     const consultaSQL = "SELECT * FROM registro_acciones";
     
     conexionBD.query(consultaSQL, (errorBD, resultados) => {
@@ -87,14 +75,12 @@ aplicacion.get('/obtener-estadisticas', (peticion, respuesta) => {
             respuesta.status(500).send('Error al consultar la base de datos');
         } else {
             console.log('📊 Datos enviados al Dashboard. Total filas:', resultados.length);
-            // Enviamos los datos en formato JSON a la página web
             respuesta.status(200).json(resultados);
         }
     });
 });
 
 
-// --- NUEVA RUTA: GUARDAR HISTORIAL DEL PARTIDO ---
 aplicacion.post('/registrar-partido', (peticion, respuesta) => {
     const paquete = peticion.body; 
 
@@ -104,7 +90,7 @@ aplicacion.post('/registrar-partido', (peticion, respuesta) => {
     
     const valoresAGuardar = [
         paquete.id_partido,
-        "Maranatha", // Siempre seremos locales en esta app
+        "Maranatha", 
         paquete.equipo_visitante,
         paquete.fecha
     ];
@@ -120,7 +106,22 @@ aplicacion.post('/registrar-partido', (peticion, respuesta) => {
     });
 });
 
-// --- 3. ENCENDER EL SERVIDOR ---
+aplicacion.post('/registrar-scout', (peticion, respuesta) => {
+    const { id_partido, atacante, zona_origen, zona_destino, resultado } = peticion.body;
+    
+    const consulta = "INSERT INTO scout_rival (id_partido, atacante, zona_origen, zona_destino, resultado) VALUES (?, ?, ?, ?, ?)";
+    
+    conexionBD.query(consulta, [id_partido, atacante, zona_origen, zona_destino, resultado], (error, resultados) => {
+        if (error) {
+            console.error("Error al guardar el scout:", error);
+            respuesta.status(500).send("Hubo un error al guardar en la base de datos.");
+        } else {
+            console.log("¡Tiro del rival guardado exitosamente!");
+            respuesta.send("Jugada guardada");
+        }
+    });
+});
+
 const PUERTO = process.env.PORT || 3000;
 
 aplicacion.listen(PUERTO, () => {
