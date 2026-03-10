@@ -86,41 +86,32 @@ function calcularTendenciaArmado(ataques) {
 }
 
 function dibujarTrayectorias(ataques) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height); 
 
     ataques.forEach(ataque => {
-        const divOrigen = document.querySelector(`.mitad-cancha.rival .zona-touch[data-zona="${ataque.zona_origen}"]`);
-        const divDestino = document.querySelector(`.mitad-cancha.defensa .zona-touch[data-zona="${ataque.zona_destino}"]`);
+        const xOrigen = ataque.origen_x * canvas.width;
+        const yOrigen = ataque.origen_y * canvas.height;
+        const xDestino = ataque.destino_x * canvas.width;
+        const yDestino = ataque.destino_y * canvas.height;
 
-        if (divOrigen && divDestino) {
-            const rectCancha = cancha.getBoundingClientRect();
-            const rectOrigen = divOrigen.getBoundingClientRect();
-            const rectDestino = divDestino.getBoundingClientRect();
+        let colorLinea = "#ffffff";
+        if (ataque.resultado === "Punto Directo") colorLinea = "#28a745"; 
+        else if (ataque.resultado === "Continuidad (Sigue)") colorLinea = "#ced4da"; 
+        else if (ataque.resultado === "Error de Ataque") colorLinea = "#dc3545"; 
+        else if (ataque.resultado === "Bloqueado") colorLinea = "#343a40"; 
 
-            const origenX = rectOrigen.left - rectCancha.left + (rectOrigen.width / 2);
-            const origenY = rectOrigen.top - rectCancha.top + (rectOrigen.height / 2);
-            const destinoX = rectDestino.left - rectCancha.left + (rectDestino.width / 2);
-            const destinoY = rectDestino.top - rectCancha.top + (rectDestino.height / 2);
+        ctx.beginPath();
+        ctx.moveTo(xOrigen, yOrigen);
+        ctx.lineTo(xDestino, yDestino);
+        ctx.strokeStyle = colorLinea;
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.stroke();
 
-            let colorLinea = "#ffffff";
-            if (ataque.resultado === "Punto Directo") colorLinea = "#28a745"; // Verde
-            else if (ataque.resultado === "Continuidad (Sigue)") colorLinea = "#ced4da"; // Gris
-            else if (ataque.resultado === "Error de Ataque") colorLinea = "#dc3545"; // Rojo
-            else if (ataque.resultado === "Bloqueado") colorLinea = "#343a40"; // Negro
-
-            ctx.beginPath();
-            ctx.moveTo(origenX, origenY);
-            ctx.lineTo(destinoX, destinoY);
-            ctx.strokeStyle = colorLinea;
-            ctx.lineWidth = 4;
-            ctx.lineCap = 'round';
-            ctx.stroke();
-
-            ctx.beginPath();
-            ctx.arc(destinoX, destinoY, 6, 0, 2 * Math.PI);
-            ctx.fillStyle = colorLinea;
-            ctx.fill();
-        }
+        ctx.beginPath();
+        ctx.arc(xDestino, yDestino, 6, 0, 2 * Math.PI);
+        ctx.fillStyle = colorLinea;
+        ctx.fill();
     });
 }
 

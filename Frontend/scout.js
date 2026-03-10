@@ -119,11 +119,20 @@ cancha.addEventListener('touchend', terminarDibujo);
 
 
 function registrarAtaque(resultado) {
+    const coord_ox = origenX / canvas.width;
+    const coord_oy = origenY / canvas.height;
+    const coord_dx = destinoX / canvas.width;
+    const coord_dy = destinoY / canvas.height;
+
     const datosScout = {
-        id_partido: "Maranatha vs Rival Prueba", 
+        id_partido: "Maranatha vs DINAMO", 
         atacante: jugadoraActiva,
         zona_origen: zonaOrigen,
         zona_destino: zonaDestino,
+        origen_x: coord_ox,
+        origen_y: coord_oy,
+        destino_x: coord_dx,
+        destino_y: coord_dy,
         resultado: resultado
     };
 
@@ -134,12 +143,11 @@ function registrarAtaque(resultado) {
     })
     .then(respuesta => respuesta.text())
     .then(mensaje => {
-        console.log("Respuesta del servidor:", mensaje);
+        console.log("Respuesta:", mensaje);
         cerrarModal();
     })
     .catch(error => {
-        console.error("Error al enviar los datos:", error);
-        alert("Hubo un problema de conexión al guardar la jugada.");
+        console.error("Error:", error);
         cerrarModal();
     });
 }

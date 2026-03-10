@@ -107,16 +107,16 @@ aplicacion.post('/registrar-partido', (peticion, respuesta) => {
 });
 
 aplicacion.post('/registrar-scout', (peticion, respuesta) => {
-    const { id_partido, atacante, zona_origen, zona_destino, resultado } = peticion.body;
+    const { id_partido, atacante, zona_origen, zona_destino, origen_x, origen_y, destino_x, destino_y, resultado } = peticion.body;
     
-    const consulta = "INSERT INTO scout_rival (id_partido, atacante, zona_origen, zona_destino, resultado) VALUES (?, ?, ?, ?, ?)";
+    const consulta = "INSERT INTO scout_rival (id_partido, atacante, zona_origen, zona_destino, origen_x, origen_y, destino_x, destino_y, resultado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
-    conexionBD.query(consulta, [id_partido, atacante, zona_origen, zona_destino, resultado], (error, resultados) => {
+    conexionBD.query(consulta, [id_partido, atacante, zona_origen, zona_destino, origen_x, origen_y, destino_x, destino_y, resultado], (error, resultados) => {
         if (error) {
             console.error("Error al guardar el scout:", error);
             respuesta.status(500).send("Hubo un error al guardar en la base de datos.");
         } else {
-            console.log("¡Tiro del rival guardado exitosamente!");
+            console.log("¡Tiro del rival guardado con precisión milimétrica!");
             respuesta.send("Jugada guardada");
         }
     });
