@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Scout - Maranatha</title>
+    <link rel="stylesheet" href="style-scout.css"> 
+    <link rel="stylesheet" href="style-dashboard-scout.css">
+    <script src="dashboard-scout.js" defer></script>
+
+</head>
+<body>
+    <header class="header-vino">
+        <h1>Análisis Táctico del Rival</h1>
+    </header>
+
+    <div class="contenedor-dashboard">
+        <aside class="panel-analisis">
+            <div class="tarjeta-filtro">
+                <h3>Filtro de Ataque</h3>
+                <label>Ver trayectorias de:</label>
+                <select id="filtro-jugadora" class="selector-scout">
+                    <option value="Todas">Todas las jugadoras</option>
+                    </select>
+            </div>
+
+            <div class="tarjeta-tendencia">
+                <h3>Tendencia de Armado</h3>
+                <p class="subtitulo">Distribución del levantador rival</p>
+                <ul class="lista-porcentajes" id="lista-armado">
+                    <li>Zona 4 (Punta): <span id="porc-z4">0%</span></li>
+                    <li>Zona 3 (Centro): <span id="porc-z3">0%</span></li>
+                    <li>Zona 2 (Opuesto): <span id="porc-z2">0%</span></li>
+                    <li>Zaguero (Z1/Z5/Z6): <span id="porc-zaguero">0%</span></li>
+                </ul>
+            </div>
+            
+            <div class="leyenda-colores">
+                <h3>Leyenda de Tiros</h3>
+                <p><span class="dot verde"></span> Punto Directo</p>
+                <p><span class="dot gris"></span> Sigue (Continuidad)</p>
+                <p><span class="dot rojo"></span> Error (Fuera/Red)</p>
+                <p><span class="dot negro"></span> Bloqueado</p>
+            </div>
+        </aside>
+
+        <main class="zona-cancha">
+            <div class="cancha-completa" id="cancha-resultados">
+                <canvas id="lienzo-resultados"></canvas>
+                
+                <div class="mitad-cancha rival">
+                    <div class="zona-touch" data-zona="1">1</div>
+                    <div class="zona-touch" data-zona="6">6</div>
+                    <div class="zona-touch" data-zona="5">5</div>
+                    <div class="zona-touch" data-zona="2">2</div>
+                    <div class="zona-touch" data-zona="3">3</div>
+                    <div class="zona-touch" data-zona="4">4</div>
+                </div>
+
+                <div class="linea-red-central"></div>
+
+                <div class="mitad-cancha defensa">
+                    <div class="zona-touch" data-zona="4">4</div>
+                    <div class="zona-touch" data-zona="3">3</div>
+                    <div class="zona-touch" data-zona="2">2</div>
+                    <div class="zona-touch" data-zona="5">5</div>
+                    <div class="zona-touch" data-zona="6">6</div>
+                    <div class="zona-touch" data-zona="1">1</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

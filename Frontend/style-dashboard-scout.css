@@ -1,0 +1,85 @@
+.contenedor-dashboard {
+    display: flex;
+    max-width: 1000px;
+    margin: 30px auto;
+    gap: 30px;
+    padding: 0 15px;
+    align-items: flex-start;
+}
+
+.panel-analisis {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tarjeta-filtro, .tarjeta-tendencia, .leyenda-colores {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-top: 4px solid var(--color-vino);
+}
+
+.tarjeta-tendencia h3, .tarjeta-filtro h3, .leyenda-colores h3 { 
+    margin-top: 0; 
+    color: var(--color-vino); 
+}
+
+.subtitulo { 
+    font-size: 14px; 
+    color: #666; 
+    margin-bottom: 15px; 
+}
+
+.selector-scout {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-weight: bold;
+    color: var(--color-vino);
+}
+
+.lista-porcentajes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-porcentajes li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.lista-porcentajes li span {
+    color: var(--color-vino);
+    font-size: 18px;
+}
+
+.dot {
+    height: 14px; width: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.dot.verde { background-color: #28a745; }
+.dot.gris { background-color: #ced4da; }
+.dot.rojo { background-color: #dc3545; }
+.dot.negro { background-color: #343a40; }
+
+.leyenda-colores p { 
+    margin: 12px 0; 
+    font-weight: bold; 
+    color: #444;
+    display: flex;
+    align-items: center;
+}
