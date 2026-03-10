@@ -7,7 +7,7 @@ const aplicacion = servidorExpress();
 aplicacion.use(cors());
 aplicacion.use(servidorExpress.json()); 
 
-const conexionBD = conectorMySQL.createConnection({
+const conexionBD = mysql.createPool({
     host: 'bwpbgxyijdpjonpghqko-mysql.services.clever-cloud.com',
     user: 'utgx1uufaesjth8q',      
     password: 'azn4zWU2Eqbh3ahEItvw',
@@ -15,9 +15,9 @@ const conexionBD = conectorMySQL.createConnection({
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
-    enableKeepAlive: true,
-    keepAliveInitialDelay: 0
 });
+
+console.log("¡Cerebro conectado a la base de datos! Listo para el Scouting.");
 
 conexionBD.getConnection((err, connection) => {
     if (err) {
