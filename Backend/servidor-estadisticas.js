@@ -11,15 +11,21 @@ const conexionBD = conectorMySQL.createConnection({
     host: 'bwpbgxyijdpjonpghqko-mysql.services.clever-cloud.com',
     user: 'utgx1uufaesjth8q',      
     password: 'azn4zWU2Eqbh3ahEItvw',
-    database: 'bwpbgxyijdpjonpghqko'
+    database: 'bwpbgxyijdpjonpghqko',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
+    enableKeepAlive: true,
+    keepAliveInitialDelay: 0
 });
 
-conexionBD.connect((error) => {
-    if (error) {
-        console.error('❌ Error conectando a MySQL:', error);
-        return;
+conexionBD.getConnection((err, connection) => {
+    if (err) {
+        console.error('Error al conectar a la BD:', err);
+    } else {
+        console.log('¡Conexión inteligente a Clever Cloud establecida!');
+        connection.release(); 
     }
-    console.log('✅ ¡Conectado exitosamente a la base de datos de Voleibol!');
 });
 
 aplicacion.post('/registrar-jugada', (peticion, respuesta) => {
