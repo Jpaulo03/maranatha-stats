@@ -7,7 +7,7 @@ const aplicacion = servidorExpress();
 aplicacion.use(cors());
 aplicacion.use(servidorExpress.json()); 
 
-const conexionBD = mysql.createPool({
+const conexionBD = conectorMySQL.createPool({
     host: 'bwpbgxyijdpjonpghqko-mysql.services.clever-cloud.com',
     user: 'utgx1uufaesjth8q',      
     password: 'azn4zWU2Eqbh3ahEItvw',
