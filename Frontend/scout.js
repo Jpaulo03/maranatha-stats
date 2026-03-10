@@ -1,29 +1,54 @@
+// --- 1. CAPTURAR ELEMENTOS ---
 const cancha = document.getElementById('cancha');
 const canvas = document.getElementById('lienzo-dibujo');
 const ctx = canvas.getContext('2d');
 const modal = document.getElementById('modal-resultado');
-const botonesJugadoras = document.querySelectorAll('.btn-jugadora');
 
+// Nuevos elementos para agregar jugadoras
+const inputNuevaJugadora = document.getElementById('nueva-jugadora');
+const btnAgregarJugadora = document.getElementById('btn-agregar-jugadora');
+const listaJugadoras = document.getElementById('lista-jugadoras');
+
+// Botones del Modal
 const btnPunto = document.querySelector('.btn-res.punto');
 const btnSigue = document.querySelector('.btn-res.sigue');
 const btnError = document.querySelector('.btn-res.error');
 const btnBloqueo = document.querySelector('.btn-res.bloqueo');
 const btnCancelar = document.querySelector('.btn-cancelar');
 
+// Variables para el dibujo
 let dibujando = false;
 let origenX = 0, origenY = 0;
 let destinoX = 0, destinoY = 0;
 let zonaOrigen = "";
 let zonaDestino = "";
-let jugadoraActiva = "#4 - Central"; 
+let jugadoraActiva = ""; 
 
-botonesJugadoras.forEach(boton => {
-    boton.addEventListener('click', (e) => {
-        botonesJugadoras.forEach(b => b.classList.remove('activa'));
-        e.target.classList.add('activa');
-        jugadoraActiva = e.target.innerText;
-    });
+function activarJugadora(boton) {
+    document.querySelectorAll('.btn-jugadora').forEach(b => b.classList.remove('activa'));
+    boton.classList.add('activa');
+    jugadoraActiva = boton.innerText;
+}
+
+btnAgregarJugadora.addEventListener('click', () => {
+    const nombre = inputNuevaJugadora.value.trim();
+    if (nombre !== "") {
+        const nuevoBoton = document.createElement('button');
+        nuevoBoton.className = 'btn-jugadora';
+        nuevoBoton.innerText = nombre;
+        
+        nuevoBoton.addEventListener('click', () => activarJugadora(nuevoBoton));
+
+        listaJugadoras.appendChild(nuevoBoton);
+        
+        if (listaJugadoras.children.length === 1) {
+            activarJugadora(nuevoBoton);
+        }
+
+        inputNuevaJugadora.value = "";
+    }
 });
+
 
 function ajustarCanvas() {
     canvas.width = cancha.offsetWidth;
