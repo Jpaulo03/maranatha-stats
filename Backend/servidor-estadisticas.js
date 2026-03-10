@@ -122,6 +122,20 @@ aplicacion.post('/registrar-scout', (peticion, respuesta) => {
     });
 });
 
+aplicacion.get('/obtener-scout', (peticion, respuesta) => {
+    const consulta = "SELECT * FROM scout_rival ORDER BY fecha DESC";
+    
+    conexionBD.query(consulta, (error, resultados) => {
+        if (error) {
+            console.error("Error al obtener datos del scout:", error);
+            respuesta.status(500).send("Error al leer la base de datos");
+        } else {
+            console.log("Enviando " + resultados.length + " trazos de scouting a la pantalla.");
+            respuesta.json(resultados); 
+        }
+    });
+});
+
 const PUERTO = process.env.PORT || 3000;
 
 aplicacion.listen(PUERTO, () => {
